@@ -27,6 +27,11 @@
   --transition: all 0.3s ease;
 }
 
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
@@ -34,10 +39,12 @@ body {
   color: var(--text-dark);
 }
 
+/* APP WRAPPER */
 .herb-journey-app {
-  width:100vw;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
   padding: 20px;
+  margin: 0 auto;
 }
 
 /* Header Styles */
@@ -63,7 +70,7 @@ body {
 }
 
 .logo-title {
-  font-size: 2.5rem;
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
   font-weight: 700;
   color: var(--primary-green);
   letter-spacing: -0.5px;
@@ -78,6 +85,7 @@ body {
 .stats-section {
   display: flex;
   gap: 24px;
+  flex-wrap: wrap;
 }
 
 .stat {
@@ -101,7 +109,7 @@ body {
   font-size: 1.2rem;
 }
 
-/* Herb Banner */
+/* Banner */
 .herb-banner {
   background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
   border-radius: var(--radius-lg);
@@ -112,7 +120,7 @@ body {
 }
 
 .banner-content h2 {
-  font-size: 2.2rem;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
   margin-bottom: 16px;
   font-weight: 700;
 }
@@ -121,6 +129,7 @@ body {
   display: flex;
   gap: 20px;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .batch-badge {
@@ -149,7 +158,7 @@ body {
 }
 
 .section-title {
-  font-size: 1.8rem;
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
   color: var(--primary-green);
   margin-bottom: 12px;
   display: flex;
@@ -193,23 +202,20 @@ body {
   display: flex;
   align-items: center;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .stage-icon {
-  width: 60px;
-  height: 60px;
+  width: clamp(40px, 6vw, 60px);
+  height: clamp(40px, 6vw, 60px);
   background: var(--primary-green);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 1.8rem;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
   flex-shrink: 0;
-}
-
-.stage-info {
-  flex: 1;
 }
 
 .stage-info h4 {
@@ -232,6 +238,7 @@ body {
 .stage-media-indicator {
   display: flex;
   gap: 16px;
+  flex-wrap: wrap;
 }
 
 .photo-count, .audio-indicator {
@@ -252,17 +259,12 @@ body {
   border-top: 2px solid var(--border-color);
 }
 
-.details-header h5 {
-  font-size: 1.1rem;
-  color: var(--text-dark);
-  margin-bottom: 20px;
-}
-
-.photos-section, .audio-section {
+/* Photos */
+.photos-section {
   margin-bottom: 32px;
 }
 
-.photos-section h6, .audio-section h6 {
+.photos-section h6 {
   font-size: 1.2rem;
   color: var(--primary-green);
   margin-bottom: 16px;
@@ -273,7 +275,7 @@ body {
 
 .photos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 16px;
   margin-bottom: 20px;
 }
@@ -312,78 +314,6 @@ body {
   font-size: 1.5rem;
 }
 
-.photo-info {
-  flex: 1;
-}
-
-.photo-info strong {
-  display: block;
-  margin-bottom: 6px;
-  color: var(--text-dark);
-}
-
-.photo-info p {
-  font-size: 0.9rem;
-  color: var(--text-light);
-}
-
-/* Audio Section */
-.audio-card {
-  background: white;
-  border-radius: var(--radius-md);
-  padding: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: var(--shadow-sm);
-}
-
-.audio-info h4 {
-  font-size: 1.2rem;
-  margin-bottom: 8px;
-  color: var(--text-dark);
-}
-
-.audio-info p {
-  color: var(--text-light);
-  margin-bottom: 12px;
-}
-
-.audio-duration {
-  display: inline-block;
-  padding: 4px 12px;
-  background: var(--light-green);
-  border-radius: 20px;
-  font-size: 0.9rem;
-  color: var(--primary-green);
-  font-weight: 600;
-}
-
-.audio-play-btn {
-  padding: 14px 32px;
-  background: var(--primary-green);
-  color: white;
-  border: none;
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  transition: var(--transition);
-  font-size: 1rem;
-}
-
-.audio-play-btn:hover {
-  background: var(--dark-green);
-  transform: scale(1.05);
-}
-
-.audio-play-btn.playing {
-  background: var(--accent-gold);
-  color: var(--text-dark);
-}
-
 /* Selected Photo Display */
 .selected-photo-display {
   background: white;
@@ -394,94 +324,27 @@ body {
   border: 2px solid var(--primary-green);
 }
 
-.selected-photo-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 2px solid var(--border-color);
+.selected-photo-image {
+  width: 100%;
+  height: auto;
+  max-height: 350px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  background: var(--bg-light);
+  box-shadow: var(--shadow-sm);
 }
 
-.selected-photo-header h5 {
-  font-size: 1.4rem;
-  color: var(--text-dark);
-}
-
-.close-btn {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: var(--text-light);
-  padding: 8px;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: var(--transition);
-}
-
-.close-btn:hover {
-  background: var(--light-green);
-  color: var(--primary-green);
+@media (max-width: 768px) {
+  .selected-photo-image {
+    max-height: 250px;
+  }
 }
 
 .photo-preview {
   display: flex;
   gap: 32px;
   align-items: flex-start;
-}
-
-.image-container {
-  flex: 2;
-}
-
-.image-placeholder {
-  width: 100%;
-  height: 400px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: var(--radius-md);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 1.5rem;
-}
-
-.image-placeholder p {
-  margin-top: 16px;
-  font-size: 1.2rem;
-}
-
-.image-placeholder small {
-  margin-top: 8px;
-  font-size: 0.9rem;
-  opacity: 0.8;
-}
-
-.photo-description {
-  flex: 1;
-  padding: 24px;
-  background: var(--bg-light);
-  border-radius: var(--radius-md);
-}
-
-.photo-description p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
-.photo-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  font-size: 0.9rem;
-  color: var(--text-light);
+  flex-wrap: wrap;
 }
 
 /* Media Summary */
@@ -522,52 +385,15 @@ body {
 }
 
 .summary-icon {
-  width: 50px;
-  height: 50px;
+  width: clamp(40px, 6vw, 50px);
+  height: clamp(40px, 6vw, 50px);
   background: var(--primary-green);
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 1.5rem;
-}
-
-.summary-header h4 {
-  font-size: 1.1rem;
-  color: var(--text-dark);
-}
-
-.summary-body {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.media-count {
-  display: flex;
-  justify-content: space-between;
-  font-weight: 600;
-  color: var(--dark-green);
-  font-size: 0.95rem;
-}
-
-.view-stage-btn {
-  padding: 12px 24px;
-  background: var(--primary-green);
-  color: white;
-  border: none;
-  border-radius: var(--radius-sm);
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-  text-align: center;
-  width: 100%;
-}
-
-.view-stage-btn:hover {
-  background: var(--dark-green);
-  transform: translateY(-2px);
+  font-size: clamp(1rem, 3vw, 1.5rem);
 }
 
 /* Footer */
@@ -605,83 +431,46 @@ body {
   font-size: 0.9rem;
 }
 
-/* Responsive Design */
+/* RESPONSIVE LAYOUT FIXES */
 @media (max-width: 768px) {
   .herb-journey-app {
     padding: 15px;
   }
-  
+
   .header-container {
     flex-direction: column;
     gap: 20px;
     text-align: center;
   }
-  
-  .logo-title {
-    font-size: 2rem;
-  }
-  
+
   .stats-section {
-    width: 100%;
     justify-content: center;
   }
-  
-  .herb-banner {
-    padding: 24px;
-  }
-  
-  .banner-content h2 {
-    font-size: 1.8rem;
-  }
-  
+
   .banner-details {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
   }
-  
+
   .stage-header {
     flex-direction: column;
     text-align: center;
-    gap: 16px;
   }
-  
-  .stage-media-indicator {
-    width: 100%;
-    justify-content: center;
-  }
-  
-  .photos-grid {
-    grid-template-columns: 1fr;
-  }
-  
+
   .photo-preview {
     flex-direction: column;
   }
-  
-  .image-placeholder {
-    height: 300px;
-  }
-  
+
   .summary-grid {
     grid-template-columns: 1fr;
   }
-}
 
-/* Selected Photo Image */
-.selected-photo-image {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-  border-radius: var(--radius-md);
-  background: var(--bg-light);
-  box-shadow: var(--shadow-sm);
-  display: block;
-}
+  .verification-note {
+    font-size: 0.9rem;
+  }
 
-/* Responsive image height */
-@media (max-width: 768px) {
-  .selected-photo-image {
-    height: 300px;
+  .timestamp {
+    font-size: 0.75rem;
   }
 }

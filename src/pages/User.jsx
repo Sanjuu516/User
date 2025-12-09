@@ -64,11 +64,12 @@ const HERB_JOURNEY = {
             description: "Quality check in field"
           }
         ],
-        audio: {
-          title: "Farmer's Cultivation Log",
-          duration: "3:45",
-          description: "Daily cultivation observations"
-        }
+audio: {
+  title: "Farmer's Cultivation Log",
+  duration: "3:45",
+  description: "Daily cultivation observations",
+  url: "https://res.cloudinary.com/domogztsv/video/upload/v1765274699/WhatsApp_Audio_2025-12-09_at_3.34.37_PM_stqkpp.ogg"
+}
       },
       {
         id: 3,
@@ -136,10 +137,10 @@ function HerbJourneyTracker() {
       <header className="app-header">
         <div className="header-container">
           <div className="logo-section">
-            <h1 className="logo-title">🌿 HerbTrack</h1>
+            <h1 className="logo-title">AyuSethu</h1>
             <p className="logo-subtitle">Blockchain-Verified Herb Journey</p>
           </div>
-          <div className="stats-section">
+          {/* <div className="stats-section">
             <div className="stat">
               <FaCamera className="stat-icon" />
               <span>12 Photos</span>
@@ -148,7 +149,7 @@ function HerbJourneyTracker() {
               <FaMicrophone className="stat-icon" />
               <span>4 Audio Logs</span>
             </div>
-          </div>
+          </div> */}
         </div>
       </header>
 
@@ -240,30 +241,30 @@ function HerbJourneyTracker() {
                     </div>
 
                     {/* Audio Section */}
-                    {stage.audio && (
-                      <div className="audio-section">
-                        <h6>
-                          <FaMicrophone /> Audio Log
-                        </h6>
-                        <div className="audio-card">
-                          <div className="audio-info">
-                            <h4>{stage.audio.title}</h4>
-                            <p>{stage.audio.description}</p>
-                            <span className="audio-duration">⏱️ {stage.audio.duration}</span>
-                          </div>
-                          <button 
-                            className={`audio-play-btn ${playingAudio === stage.id ? 'playing' : ''}`}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleAudioPlay(stage.id);
-                            }}
-                          >
-                            <FaMicrophone />
-                            {playingAudio === stage.id ? 'Listening...' : 'Play Audio'}
-                          </button>
-                        </div>
-                      </div>
-                    )}
+{stage.audio && (
+  <div className="audio-section">
+    <h6>
+      <FaMicrophone /> Audio Log
+    </h6>
+
+    <div className="custom-audio-wrapper">
+      <div className="audio-details-text">
+        <h4>{stage.audio.title}</h4>
+        <p>{stage.audio.description}</p>
+        <span className="audio-duration-tag">⏱️ {stage.audio.duration}</span>
+      </div>
+
+      {/* Actual audio player */}
+      <audio 
+        controls 
+        className="custom-audio-player"
+      >
+        <source src={stage.audio.url} type="audio/ogg" />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </div>
+)}
 
                     {/* Selected Photo Display */}
                     {selectedPhoto && (
@@ -310,38 +311,6 @@ function HerbJourneyTracker() {
         </section>
 
         {/* Media Summary */}
-        <section className="media-summary">
-          <h3 className="section-title">
-            <FaCamera /> Media Evidence Summary
-          </h3>
-          <div className="summary-grid">
-            {activeHerb.processingStages.map((stage) => (
-              <div key={stage.id} className="summary-card">
-                <div className="summary-header">
-                  <div className="summary-icon">
-                    {stage.id === 1 && <FaCertificate />}
-                    {stage.id === 2 && <FaSeedling />}
-                    {stage.id === 3 && <FaFlask />}
-                    {stage.id === 4 && <FaIndustry />}
-                  </div>
-                  <h4>{stage.name}</h4>
-                </div>
-                <div className="summary-body">
-                  <div className="media-count">
-                    <span><FaCamera /> {stage.photos.length} Photos</span>
-                    {stage.audio && <span><FaMicrophone /> 1 Audio</span>}
-                  </div>
-                  <button 
-                    className="view-stage-btn"
-                    onClick={() => handleStageClick(stage.id)}
-                  >
-                    View Details →
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
       </main>
 
       {/* Footer */}
